@@ -6,4 +6,6 @@
     <string name="title_activity_main_page">MainPageActivity</string>
     <string name="logout">Logout</string>
     <string name="verify_code">Verify Code</string>
+    <string name="find_users">Find Users</string>
+    <string name="cancel">Cancel</string>
 </resources>

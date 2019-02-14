@@ -1,30 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-
-        android:id="@+id/phoneNumber"
+    <LinearLayout
+        android:id="@+id/phonePanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_phone_number" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="200dp"
+        android:orientation="vertical">
 
-    <EditText
+        <EditText
 
-        android:id="@+id/code"
-        android:layout_width="wrap_content"
+            android:id="@+id/phoneInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_phone_number" />
+
+
+        <Button
+            android:id="@+id/phoneVerificationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_verification" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/codePanel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_code" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/send_verification" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+
+                android:id="@+id/codeInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_code" />
+        </LinearLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:alignItems="flex_end"
+            app:flexDirection="row"
+            app:flexWrap="nowrap"
+            app:justifyContent="center">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel" />
 
 
-</LinearLayout>
+            <Button
+                android:id="@+id/codeVerificationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verify_code" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
