@@ -48,7 +48,7 @@ public class FindUserActivity extends AppCompatActivity {
             String phone = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
             phone = PhoneNumberNormalizer.normalizePhoneNumber(phone, getApplicationContext());
-            User contact = new User(name, phone);
+            User contact = new User(name, phone, null);
             contactList.add(contact);
             userListAdapter.notifyDataSetChanged();
             getUserDetails(contact);
@@ -82,7 +82,7 @@ public class FindUserActivity extends AppCompatActivity {
                             }
 
                         }
-                        User user = new User(name, phone);
+                        User user = new User(name, phone, childSnapshot.getKey());
                         userList.add(user);
                         userListAdapter.notifyDataSetChanged();
                         return;
