@@ -1,4 +1,4 @@
-package eu.ozeman.whatsappclone;
+package eu.ozeman.whatsappclone.Utils;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;

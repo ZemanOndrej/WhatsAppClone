@@ -1,4 +1,4 @@
-package eu.ozeman.whatsappclone;
+package eu.ozeman.whatsappclone.User;
 
 public class User {
     private String name, phone;

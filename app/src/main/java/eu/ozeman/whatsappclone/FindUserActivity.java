@@ -18,6 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import eu.ozeman.whatsappclone.User.User;
+import eu.ozeman.whatsappclone.User.UserListAdapter;
+import eu.ozeman.whatsappclone.Utils.PhoneNumberNormalizer;
+
 public class FindUserActivity extends AppCompatActivity {
     private RecyclerView userListView;
     private RecyclerView.Adapter userListAdapter;
@@ -67,6 +71,16 @@ public class FindUserActivity extends AppCompatActivity {
                         }
                         if (childSnapshot.child("name").getValue() != null) {
                             name = childSnapshot.child("name").getValue().toString();
+                        }
+                        if (name.equals(phone)) {
+
+                            for (User contact : contactList) {
+                                if (contact.getPhone().equals(phone)) {
+                                    name = contact.getName();
+                                    break;
+                                }
+                            }
+
                         }
                         User user = new User(name, phone);
                         userList.add(user);

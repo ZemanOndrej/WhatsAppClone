@@ -1,4 +1,4 @@
-package eu.ozeman.whatsappclone;
+package eu.ozeman.whatsappclone.User;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import eu.ozeman.whatsappclone.R;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserListViewHolder> {
 
