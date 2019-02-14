@@ -8,4 +8,7 @@
     <string name="verify_code">Verify Code</string>
     <string name="find_users">Find Users</string>
     <string name="cancel">Cancel</string>
+    <string name="code_empty">Grrrr, why is your code empty. Authentication was not successful!</string>
+    <string name="firebase_error">Error, something failed with Firebase authentication.</string>
+    <string name="wrong_code">Error, code is not right. Authentication was not successful!</string>
 </resources>

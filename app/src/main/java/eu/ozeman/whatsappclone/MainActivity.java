@@ -47,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
         verifyCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, codeInput.getText().toString());
-                signInWithCredential(credential);
+                if (verificationId != null && !codeInput.getText().toString().isEmpty()) {
+                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, codeInput.getText().toString());
+                    signInWithCredential(credential);
+                } else {
+                    Toast.makeText(MainActivity.this, getString(R.string.code_empty), Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -81,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onVerificationFailed(final FirebaseException e) {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        Toast errorToast = Toast.makeText(MainActivity.this, "Error, something failed with Firebase authentication. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+                        Toast errorToast = Toast.makeText(MainActivity.this, getString(R.string.firebase_error) + e.getLocalizedMessage(), Toast.LENGTH_SHORT);
                         errorToast.show();
                     }
                 });
@@ -104,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     logIn();
+                } else {
+                    Toast.makeText(MainActivity.this, getString(R.string.wrong_code), Toast.LENGTH_SHORT).show();
                 }
             }
         });
