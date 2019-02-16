@@ -43,7 +43,6 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), FindUserActivity.class));
-//                finish();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
