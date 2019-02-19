@@ -39,21 +39,13 @@ public class MainPageActivity extends AppCompatActivity {
         Button logout = findViewById(R.id.logout);
         Button findUsers = findViewById(R.id.find_users);
         chatList = new ArrayList<>();
-        findUsers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FindUserActivity.class));
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
+        findUsers.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), FindUserActivity.class)));
+        logout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         });
         getPermissions();
         initializeRecycleView();

@@ -47,12 +47,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatID = getIntent().getExtras().getString("chatID");
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage();
-            }
-        });
+        sendButton.setOnClickListener(v -> sendMessage());
 
         initializeRecycleView();
         getChatMessages();

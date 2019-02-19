@@ -37,7 +37,7 @@ public class PhoneNumberNormalizer {
         return country2phone;
     }
 
-    private static Map<String, String> country2phone = new HashMap<String, String>();
+    private static Map<String, String> country2phone = new HashMap<>();
 
     static {
         country2phone.put("AF", "+93");

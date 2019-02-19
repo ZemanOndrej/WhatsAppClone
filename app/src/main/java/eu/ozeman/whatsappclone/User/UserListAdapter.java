@@ -39,15 +39,12 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     public void onBindViewHolder(@NonNull UserListViewHolder userListViewHolder, final int position) {
         userListViewHolder.name.setText(userList.get(position).getName());
         userListViewHolder.phone.setText(userList.get(position).getPhone());
-        userListViewHolder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-                String key = db.child("chat").push().getKey();
-                db.child("user").child(FirebaseAuth.getInstance().getUid()).child("chat").child(key).setValue(true);
-                db.child("user").child(userList.get(position).getUid()).child("chat").child(key).setValue(true);
+        userListViewHolder.layout.setOnClickListener(v -> {
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+            String key = db.child("chat").push().getKey();
+            db.child("user").child(FirebaseAuth.getInstance().getUid()).child("chat").child(key).setValue(true);
+            db.child("user").child(userList.get(position).getUid()).child("chat").child(key).setValue(true);
 
-            }
         });
     }
 

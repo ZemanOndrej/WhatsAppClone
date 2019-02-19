@@ -51,37 +51,25 @@ public class LoginActivity extends AppCompatActivity {
         codePanel = findViewById(R.id.codePanel);
         phonePanel = findViewById(R.id.phonePanel);
 
-        verifyCodeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (verificationId != null && !codeInput.getText().toString().isEmpty()) {
-                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, codeInput.getText().toString());
-                    signInWithCredential(credential);
-                } else {
-                    Toast.makeText(LoginActivity.this, getString(R.string.code_empty), Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                phonePanel.setVisibility(View.VISIBLE);
-                codePanel.setVisibility(View.GONE);
-            }
-        });
-
-        verifyPhoneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        phoneInput.getText().toString(), 120,
-                        TimeUnit.SECONDS, LoginActivity.this, authCallbacks
-                );
+        verifyCodeButton.setOnClickListener(v -> {
+            if (verificationId != null && !codeInput.getText().toString().isEmpty()) {
+                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, codeInput.getText().toString());
+                signInWithCredential(credential);
+            } else {
+                Toast.makeText(LoginActivity.this, getString(R.string.code_empty), Toast.LENGTH_SHORT).show();
 
             }
         });
+
+        cancelButton.setOnClickListener(v -> {
+            phonePanel.setVisibility(View.VISIBLE);
+            codePanel.setVisibility(View.GONE);
+        });
+
+        verifyPhoneButton.setOnClickListener(v -> PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneInput.getText().toString(), 120,
+                TimeUnit.SECONDS, LoginActivity.this, authCallbacks
+        ));
 
         authCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
@@ -91,11 +79,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(final FirebaseException e) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast errorToast = Toast.makeText(LoginActivity.this, getString(R.string.firebase_error) + e.getLocalizedMessage(), Toast.LENGTH_SHORT);
-                        errorToast.show();
-                    }
+                runOnUiThread(() -> {
+                    Toast errorToast = Toast.makeText(LoginActivity.this, getString(R.string.firebase_error) + e.getLocalizedMessage(), Toast.LENGTH_SHORT);
+                    errorToast.show();
                 });
             }
 
@@ -111,14 +97,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signInWithCredential(PhoneAuthCredential phoneAuthCredential) {
-        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    logIn();
-                } else {
-                    Toast.makeText(LoginActivity.this, getString(R.string.wrong_code), Toast.LENGTH_SHORT).show();
-                }
+        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                logIn();
+            } else {
+                Toast.makeText(LoginActivity.this, getString(R.string.wrong_code), Toast.LENGTH_SHORT).show();
             }
         });
     }
